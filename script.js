@@ -9,13 +9,13 @@ let losses = 0;
 let ties = 0;
 
 /* Select rock paper or scissors at random from array, returns one of these. */ 
-function computerPlay() {
+function getComputerPlay() {
     computerSelection =  rockPaperScissors[Math.floor(Math.random() * rockPaperScissors.length)];
     return computerSelection;
 }
 
 /* Takes user input and transforms it to lowercase, returns this input if it matches rock, paper, or scissors.  */
-function userPlay() {
+function getUserPlay() {
     playerSelection = window.prompt("Rock, paper, or scissors, which will it be?");
     if (rockPaperScissors.indexOf(playerSelection.toLowerCase()) !== -1) {
         playerSelection = playerSelection.toLowerCase();
@@ -24,7 +24,7 @@ function userPlay() {
     /* Prompt repeats if input is not rock, paper, or scissors */
     } else {
         alert("Not a valid entry, please try again.");
-        userPlay();
+        getUserPlay();
     }
 }
 
@@ -59,11 +59,12 @@ function playRound(playerSelection, computerSelection) {
         return losses++;
     }
 }
+
 /* For loop that calls playRound() five times and opens a window displaying the results. */
 function playMatch() {
     for (let i = 0; i < 5; i++) {
-        userPlay();
-        computerPlay();
+        getUserPlay();
+        getComputerPlay();
         playRound(playerSelection, computerSelection);
     }
     console.log(`Final score: ${wins}  win(s) - ${losses} loss(es) - ${ties} tie(s).`);
