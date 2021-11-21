@@ -8,13 +8,13 @@ let wins = 0;
 let losses = 0;
 let ties = 0;
 
-/* Select rock paper or scissors at random */ 
+/* Select rock paper or scissors at random from array, returns one of these. */ 
 function computerPlay() {
     computerSelection =  rockPaperScissors[Math.floor(Math.random() * rockPaperScissors.length)];
     return computerSelection;
 }
 
-/* Takes user input and transforms it to lowercase.  */
+/* Takes user input and transforms it to lowercase, returns this input if it matches rock, paper, or scissors.  */
 function userPlay() {
     playerSelection = window.prompt("Rock, paper, or scissors, which will it be?");
     if (rockPaperScissors.indexOf(playerSelection.toLowerCase()) !== -1) {
@@ -36,23 +36,26 @@ function playRound(playerSelection, computerSelection) {
         console.log("You played: " + playerSelection);
         console.log("Computer played: " + computerSelection);
         console.log("It's a tie.");
-        alert("You played: " + playerSelection + ". \nThe computer played: " + computerSelection + ". \n It's a tie.")
+        alert(`You played: ${playerSelection}. \nThe computer played: ${computerSelection}. \nIt's a tie.`);
         return ties++;
-
-    /* Logic for player win */
-    } else if ((playerSelection === "rock" && computerSelection === "scissors") || (playerSelection === "paper" && computerSelection === "rock") || (playerSelection === "scissors" && computerSelection === "paper")) {
+    }
+    /* Logic for player wins */
+    else if ((playerSelection === "rock" && computerSelection === "scissors") || 
+                (playerSelection === "paper" && computerSelection === "rock") || 
+                (playerSelection === "scissors" && computerSelection === "paper")) 
+            {
         console.log("You played: " + playerSelection);
         console.log("Computer played: " + computerSelection);
         console.log("You win!");
-        alert("You played: " + playerSelection + ". \nThe computer played: " + computerSelection + ". \n You win!")
+        alert(`You played: ${playerSelection}. \nThe computer played: ${computerSelection}. \nYou win!`);
         return wins++;
 
-    /* Logic for player lose */
+    /* Every other instance is a player loss. */
     } else {
         console.log("You played: " + playerSelection);
         console.log("Computer played: " + computerSelection);
         console.log("You lose.");
-        alert("You played: " + playerSelection + ". \nThe computer played: " + computerSelection + ". \n Better luck next time.");
+        alert(`You played: ${playerSelection}. \nThe computer played: ${computerSelection}. \nBetter luck next time.`);
         return losses++;
     }
 }
@@ -63,8 +66,9 @@ function playMatch() {
         computerPlay();
         playRound(playerSelection, computerSelection);
     }
-    console.log("Final score: " + wins + "win(s)" + " - " + losses + "loss(es)" + " - " + ties + "tie(s)");
-    alert("Thanks for playing! Your final score is " + wins + " win(s) to " + losses + " loss(es) and " + ties + " tie(s).");
+    console.log(`Final score: ${wins}  win(s) - ${losses} loss(es) - ${ties} tie(s).`);
+    alert(`Thanks for playing! Your final score is: 
+            ${wins} win(s) to ${losses} loss(es) and ${ties} tie(s).`);
 }
 
 playMatch();
